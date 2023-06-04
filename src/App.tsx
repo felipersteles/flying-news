@@ -1,10 +1,17 @@
 import styled from "styled-components";
-import { Header } from "./components/Header";
+import { Header } from "./components";
+import { useState } from "react";
+import { Books } from "./pages";
 
 function App() {
+  const [path, setPath] = useState<string>("");
+
   return (
     <AppContainer>
-      <Header />
+      <Header setPath={setPath} />
+      {path === "" && <>Home</>}
+      {path === "books" && <Books />}
+      {path === "news" && <>news</>}
     </AppContainer>
   );
 }

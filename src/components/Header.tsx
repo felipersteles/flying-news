@@ -1,7 +1,39 @@
 import styled from "styled-components";
 
-export const Header = (): JSX.Element => {
-  return <HeaderContainer>Header</HeaderContainer>;
+type HeaderParams = {
+  setPath: (path: string) => void;
 };
 
-const HeaderContainer = styled.header``;
+export const Header = ({ setPath }: HeaderParams): JSX.Element => {
+  return (
+    <HeaderContainer>
+      <Logo>Teles</Logo>
+      <PathMenu>
+        <PathLink onClick={() => setPath("books")}>Books</PathLink>
+        <PathLink onClick={() => setPath("news")}>News</PathLink>
+      </PathMenu>
+    </HeaderContainer>
+  );
+};
+
+const HeaderContainer = styled.header`
+  border: 1px solid black;
+  height: 10vh;
+
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+const Logo = styled.div``;
+
+const PathMenu = styled.ul`
+  display: flex;
+  gap: 12px;
+  list-style: none;
+`;
+
+const PathLink = styled.li`
+  cursor: pointer;
+`;
