@@ -11,7 +11,7 @@ export class BooksService {
 
   getBookSectionList = async (quantity: number) => {
     const res = await this.axios.get(
-      "lists/names.json?api-key=Ew23BomzWHNAYbDT5jQoV8O34Fy37jk6"
+      `lists/names.json?api-key=${process.env.API_KEY}`
     );
 
     // console.log("section number: " + quantity)
@@ -27,7 +27,7 @@ export class BooksService {
 
   getBooksBySection = async (section: string) => {
     const res = await this.axios.get(
-      `lists/current/${section}.json?api-key=Ew23BomzWHNAYbDT5jQoV8O34Fy37jk6`
+      `lists/current/${section}.json?api-key=${process.env.API_KEY}`
     );
 
     return res.data.results;
@@ -35,7 +35,7 @@ export class BooksService {
 
   getBooks = async () => {
     const res = await this.axios.get(
-      `lists/current/hardcover-fiction.json?api-key=Ew23BomzWHNAYbDT5jQoV8O34Fy37jk6`
+      `lists/current/hardcover-fiction.json?api-key=${process.env.API_KEY}`
     );
 
     return res.data.results;
