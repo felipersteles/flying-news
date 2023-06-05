@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Header } from "./components";
 import { useState } from "react";
-import { Books } from "./pages";
+import { Books, Home } from "./pages";
 
 function App() {
   const [path, setPath] = useState<string>("");
@@ -9,7 +9,7 @@ function App() {
   return (
     <AppContainer>
       <Header setPath={setPath} />
-      {path === "" && <>Home</>}
+      {path === "" && <Home />}
       {path === "books" && <Books />}
       {path === "news" && <>news</>}
     </AppContainer>

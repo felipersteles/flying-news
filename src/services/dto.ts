@@ -19,4 +19,5 @@ export type BookDTO = {
   author: string;
   book_uri: string;
   description: string;
+  book_image?: string;
 };

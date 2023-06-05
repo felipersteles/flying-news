@@ -7,7 +7,7 @@ type HeaderParams = {
 export const Header = ({ setPath }: HeaderParams): JSX.Element => {
   return (
     <HeaderContainer>
-      <Logo>Teles</Logo>
+      <Logo onClick={() => setPath("")}>Teles</Logo>
       <PathMenu>
         <PathLink onClick={() => setPath("books")}>Books</PathLink>
         <PathLink onClick={() => setPath("news")}>News</PathLink>
