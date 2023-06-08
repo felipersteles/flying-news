@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { SectionListDTO } from "../../../services";
+import { isMobile } from "react-device-detect";
 
 type SectionListParams = {
   sectionsData: SectionListDTO[];
@@ -14,7 +15,7 @@ export const SectionList = ({
 }: SectionListParams): JSX.Element => {
   const updateBooksList = (section: SectionListDTO) => {
     getBooksBySection(section.list_name_encoded);
-    setShowSection(false);
+    if (isMobile) setShowSection(false);
   };
 
   return (
@@ -32,7 +33,8 @@ export const SectionList = ({
 
 const SectionListContainer = styled.div`
   border: 1px solid black;
-  height: 100%;
+  height: 85%;
+  padding: 4px;
   overflow-y: scroll;
 `;
 

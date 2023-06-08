@@ -1,5 +1,6 @@
 import axios from "axios";
 
+const key = "is a secret";
 export class BooksService {
   private axios;
 
@@ -10,9 +11,7 @@ export class BooksService {
   }
 
   getBookSectionList = async (quantity: number) => {
-    const res = await this.axios.get(
-      `lists/names.json?api-key=${process.env.API_KEY}`
-    );
+    const res = await this.axios.get(`lists/names.json?api-key=${key}`);
 
     // console.log("section number: " + quantity)
     const booksSectionArray = res.data.results.filter(
@@ -27,15 +26,25 @@ export class BooksService {
 
   getBooksBySection = async (section: string) => {
     const res = await this.axios.get(
-      `lists/current/${section}.json?api-key=${process.env.API_KEY}`
+      `lists/current/${section}.json?api-key=${key}`
     );
 
     return res.data.results;
   };
+}
 
-  getBooks = async () => {
+export class NewsService {
+  private axios;
+
+  constructor() {
+    this.axios = axios.create({
+      baseURL: `https://api.nytimes.com/svc/news/v3/`,
+    });
+  }
+
+  getNewsBySection = async (section: string) => {
     const res = await this.axios.get(
-      `lists/current/hardcover-fiction.json?api-key=${process.env.API_KEY}`
+      `content/nyt/${section}.json?api-key=${key}`
     );
 
     return res.data.results;

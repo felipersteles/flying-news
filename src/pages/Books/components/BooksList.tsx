@@ -29,6 +29,8 @@ export const BooksList = ({ books }: BooksListParams): JSX.Element => {
 const BooksListContainer = styled.div`
   overflow-y: scroll;
   padding: 12px 18px;
+  width: 100%;
+  height: 85%;
 `;
 
 const BookCardsContainer = styled.div`

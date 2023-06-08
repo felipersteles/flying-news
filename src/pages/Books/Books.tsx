@@ -13,7 +13,7 @@ const bService = new BooksService();
 
 export const Books = (): JSX.Element => {
   const [sectionsData, setSectionData] = useState<SectionListDTO[]>([]);
-  const [showSection, setShowSection] = useState<boolean>(!isMobile);
+  const [showSection, setShowSection] = useState<boolean>(true);
   const [books, setBooks] = useState<BookListDTO>();
 
   const getBooksBySection = async (section: string) => {
@@ -35,7 +35,7 @@ export const Books = (): JSX.Element => {
 
       setSectionData(sectionData);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   });
 
@@ -64,6 +64,7 @@ const BooksPageContainer = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
+  padding: 4px;
 `;
 
 const SectionMenu = styled.div`

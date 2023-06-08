@@ -6,19 +6,19 @@ type HeaderParams = {
 
 export const Header = ({ setPath }: HeaderParams): JSX.Element => {
   return (
-    <HeaderContainer>
-      <Logo onClick={() => setPath("")}>Teles</Logo>
+    <HeaderContainer size={"10vh"}>
+      <Logo onClick={() => setPath("/")}>Teles</Logo>
       <PathMenu>
-        <PathLink onClick={() => setPath("books")}>Books</PathLink>
-        <PathLink onClick={() => setPath("news")}>News</PathLink>
+        <PathLink onClick={() => setPath("/books")}>Books</PathLink>
+        <PathLink onClick={() => setPath("/news")}>News</PathLink>
       </PathMenu>
     </HeaderContainer>
   );
 };
 
-const HeaderContainer = styled.header`
+const HeaderContainer = styled.header<{ size: string }>`
   border: 1px solid black;
-  height: 10vh;
+  height: ${(props) => props.size};
 
   display: flex;
   width: 100%;

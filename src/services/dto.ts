@@ -21,3 +21,19 @@ export type BookDTO = {
   description: string;
   book_image?: string;
 };
+
+export type NewsDTO = {
+  abstract: string;
+  uri: string;
+  title: string;
+  thumbnail_standard: string;
+  multimedia: MidiaDTO[];
+  published_date: string;
+};
+
+export type MidiaDTO = {
+  format: string;
+  height: number;
+  url: string;
+  type: string;
+};

@@ -1,17 +1,21 @@
 import styled from "styled-components";
 import { Header } from "./components";
-import { useState } from "react";
-import { Books, Home } from "./pages";
+import { useEffect, useState } from "react";
+import { Books, Home, News } from "./pages";
 
 function App() {
   const [path, setPath] = useState<string>("");
 
+  useEffect(() => {
+    setPath(window.location.pathname);
+  }, [setPath]);
+
   return (
     <AppContainer>
       <Header setPath={setPath} />
-      {path === "" && <Home />}
-      {path === "books" && <Books />}
-      {path === "news" && <>news</>}
+      {path === "/" && <Home />}
+      {path === "/books" && <Books />}
+      {path === "/news" && <News />}
     </AppContainer>
   );
 }
