@@ -17,12 +17,17 @@ export const Clock = () => {
 
   return (
     <ClockContainer id="clock">
+      <h2>It is now </h2>
       <ClockDisplay>{clock}</ClockDisplay>
     </ClockContainer>
   );
 };
 
-const ClockContainer = styled.div``;
+const ClockContainer = styled.div`
+  display: flex;
+  align-items: flex-end;
+  gap: 1em;
+`;
 
 const ClockDisplay = styled.h1`
   font-family: "Alarm Clock";

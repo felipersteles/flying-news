@@ -1,24 +1,39 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { MenuIcon } from "../../../assets";
 
 type SectionListParams = {
   sectionsData: string[];
+  getNewsBySection: (section: string) => void;
 };
 
 export const SectionList = ({
   sectionsData,
+  getNewsBySection,
 }: SectionListParams): JSX.Element => {
   const [showSection, setShowSection] = useState<boolean>(false);
 
+  const updateNewsList = (section: string) => {
+    getNewsBySection(section);
+    setShowSection(!showSection);
+  };
+
   return (
     <>
-      <ShowSection onClick={() => setShowSection(!showSection)}>\/</ShowSection>
+      <ShowSection onClick={() => setShowSection(!showSection)}>
+        <MenuIcon color="#fff" />
+      </ShowSection>
 
       {showSection && (
         <SectionListContainer>
           <ListContainer>
             {sectionsData.map((section, key) => (
-              <SectionContainer key={key}>{section}</SectionContainer>
+              <SectionContainer
+                key={key}
+                onClick={() => updateNewsList(section)}
+              >
+                {section}
+              </SectionContainer>
             ))}
           </ListContainer>
         </SectionListContainer>
@@ -45,6 +60,11 @@ const SectionContainer = styled.li`
 const ShowSection = styled.div`
   cursor: pointer;
   position: absolute;
-  top: 50px;
-  right: 30px;
+  top: -6.5vh;
+  left: 2vw;
+  display: flex;
+  align-items: center;
+
+  border-radius: 50%;
+  background-color: black;
 `;

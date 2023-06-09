@@ -9,11 +9,19 @@ type BooksListParams = {
 export const BooksList = ({ books }: BooksListParams): JSX.Element => {
   return (
     <BooksListContainer>
-      {!books && <>Select a section to see the books.</>}
+      {!books && (
+        <NoBooksContainer>
+          <h2>Select a section</h2>
+          <p>
+            There are a lot kind of books and you can see some of them in the
+            sections list
+          </p>
+        </NoBooksContainer>
+      )}
 
       {books && (
         <>
-          <div>You are seeing the {books?.list_name}</div>
+          <SectionTitle>Top 10 of {books?.list_name} books</SectionTitle>
           <br />
           <BookCardsContainer>
             {books?.books?.map((book, key) => (
@@ -37,3 +45,7 @@ const BookCardsContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+const SectionTitle = styled.h2``;
+
+const NoBooksContainer = styled.div``;

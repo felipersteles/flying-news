@@ -3,7 +3,6 @@ import { BooksList, SectionList } from "./components";
 import { BooksService } from "../../services/nytAPI";
 import { useState } from "react";
 import { BookListDTO, SectionListDTO } from "../../services";
-import { isMobile } from "react-device-detect";
 
 const bService = new BooksService();
 
@@ -13,7 +12,6 @@ const bService = new BooksService();
 
 export const Books = (): JSX.Element => {
   const [sectionsData, setSectionData] = useState<SectionListDTO[]>([]);
-  const [showSection, setShowSection] = useState<boolean>(true);
   const [books, setBooks] = useState<BookListDTO>();
 
   const getBooksBySection = async (section: string) => {
@@ -41,19 +39,10 @@ export const Books = (): JSX.Element => {
 
   return (
     <BooksPageContainer>
-      {isMobile && (
-        <SectionMenu onClick={() => setShowSection(!showSection)}>
-          Select section
-        </SectionMenu>
-      )}
-
-      {showSection && (
-        <SectionList
-          sectionsData={sectionsData}
-          getBooksBySection={getBooksBySection}
-          setShowSection={setShowSection}
-        />
-      )}
+      <SectionList
+        sectionsData={sectionsData}
+        getBooksBySection={getBooksBySection}
+      />
 
       <BooksList books={books} />
     </BooksPageContainer>
@@ -64,11 +53,4 @@ const BooksPageContainer = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
-  padding: 4px;
-`;
-
-const SectionMenu = styled.div`
-  position: absolute;
-  top: 65px;
-  left: 12px;
 `;

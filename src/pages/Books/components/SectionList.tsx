@@ -1,33 +1,46 @@
 import styled from "styled-components";
 import { SectionListDTO } from "../../../services";
 import { isMobile } from "react-device-detect";
+import { useState } from "react";
+import { MenuIcon } from "../../../assets";
 
 type SectionListParams = {
   sectionsData: SectionListDTO[];
   getBooksBySection: (value: string) => void;
-  setShowSection: (value: boolean) => void;
 };
 
 export const SectionList = ({
   sectionsData,
   getBooksBySection,
-  setShowSection,
 }: SectionListParams): JSX.Element => {
+  const [showSection, setShowSection] = useState<boolean>(true);
+
   const updateBooksList = (section: SectionListDTO) => {
     getBooksBySection(section.list_name_encoded);
     if (isMobile) setShowSection(false);
   };
 
   return (
-    <SectionListContainer>
-      <ListContainer>
-        {sectionsData.map((section, key) => (
-          <SectionContainer key={key} onClick={() => updateBooksList(section)}>
-            {section.display_name}
-          </SectionContainer>
-        ))}
-      </ListContainer>
-    </SectionListContainer>
+    <>
+      <SectionMenu onClick={() => setShowSection(!showSection)}>
+        <MenuIcon color="#fff" />
+      </SectionMenu>
+
+      {showSection && (
+        <SectionListContainer>
+          <ListContainer>
+            {sectionsData.map((section, key) => (
+              <SectionContainer
+                key={key}
+                onClick={() => updateBooksList(section)}
+              >
+                {section.display_name}
+              </SectionContainer>
+            ))}
+          </ListContainer>
+        </SectionListContainer>
+      )}
+    </>
   );
 };
 
@@ -46,4 +59,15 @@ const ListContainer = styled.ul`
 const SectionContainer = styled.li`
   cursor: pointer;
   margin-bottom: 6px;
+`;
+
+const SectionMenu = styled.div`
+  cursor: pointer;
+  position: absolute;
+  top: -6.5vh;
+  left: 2vw;
+  border-radius: 50%;
+  background-color: black;
+  display: flex;
+  align-items: center;
 `;

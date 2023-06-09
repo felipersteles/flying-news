@@ -12,10 +12,12 @@ function App() {
 
   return (
     <AppContainer>
-      <Header setPath={setPath} />
-      {path === "/" && <Home />}
-      {path === "/books" && <Books />}
-      {path === "/news" && <News />}
+      <Header height={"10vh"} setPath={setPath} />
+      <PageContainer>
+        {path === "/" && <Home />}
+        {path === "/books" && <Books />}
+        {path === "/news" && <News />}
+      </PageContainer>
     </AppContainer>
   );
 }
@@ -27,6 +29,14 @@ const AppContainer = styled.div`
   top: 0;
   left: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+`;
+
+const PageContainer = styled.div`
+  position: fixed;
+  top: 10vh;
+  height: 100%;
 `;
 
 export default App;

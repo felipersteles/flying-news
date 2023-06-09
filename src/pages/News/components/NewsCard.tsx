@@ -10,7 +10,7 @@ export const NewsCard = ({ news }: NewsCardParams): JSX.Element => {
     <NewsCardContainer>
       <Title>
         <Thumbnail src={news.thumbnail_standard} alt="imagem maluca" />
-        <h1>{news.title}</h1>
+        <h2>{news.title}</h2>
       </Title>
 
       <p>{news.abstract}</p>
@@ -21,11 +21,14 @@ export const NewsCard = ({ news }: NewsCardParams): JSX.Element => {
 const NewsCardContainer = styled.div`
   border: 1px solid red;
   cursor: pointer;
+  padding: 4px;
 `;
 
 const Thumbnail = styled.img`
   width: 100%;
-  height: auto;
+  height: 100%;
+  border: 0.5px solid black;
+  border-radius: 2px;
 `;
 
 const Title = styled.div`

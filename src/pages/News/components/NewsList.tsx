@@ -20,6 +20,7 @@ export const NewsList = ({ newsData }: NewsListParams) => {
 
 const NewsListContainer = styled.div`
   display: flex;
+  height: 100%;
   flex-direction: column;
   gap: 4px;
 `;
@@ -27,4 +28,5 @@ const NewsListContainer = styled.div`
 const ListContainer = styled.div`
   scroll-snap-align: start;
   overflow-y: scroll;
+  padding-bottom: 100px;
 `;
