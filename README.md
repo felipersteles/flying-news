@@ -2,8 +2,8 @@
 
 Using the New York Times [API](https://developer.nytimes.com/).
 
-<br/>
-Site consumindo a [API do New York Times](https://developer.nytimes.com/).
+
+Site consumindo a API do New York Times. [acesse](https://developer.nytimes.com/).
 
 ## Português
 
