@@ -11,9 +11,9 @@ Site consumindo a API do New York Times. [acesse](https://developer.nytimes.com/
 
 É uma aplicação um tanto quanto simples mas ao mesmo tempo com uma certa complexidade, desenvolvida em Reactjs. Para rodar basta fazer o procedimento base de uma aplicação em React.
 
-1 - Certifique-se de ter o node instalado em sua maquina.
-2 - Baixe as depedencias do projeto.
-3 - Execute o comando para rodar o servidor.
+ 1 - Certifique-se de ter o node instalado em sua maquina.
+ 2 - Baixe as depedencias do projeto.
+ 3 - Execute o comando para rodar o servidor.
 
 Exemplo:
 
@@ -43,9 +43,9 @@ $ npm start
 
 It's a Reactjs simple application so if you have the node in your machine, you can just download the dependencies and run the project. Follow the steps below:
 
-1 - See the nodes version
-2 - Download the dependencies
-3 - Run the project
+ 1 - See the nodes version
+ 2 - Download the dependencies
+ 3 - Run the project
 
 Example:
 
