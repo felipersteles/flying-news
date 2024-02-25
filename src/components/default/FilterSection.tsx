@@ -1,15 +1,13 @@
-import { useNews } from "@/hooks/home/news";
+import { useNewsContext } from "@/contexts/NewsContext";
 import { SectionENUM } from "@/services/enum";
 import { Button, Flex, Select, useColorModeValue } from "@chakra-ui/react";
-import { ChangeEventHandler, useState } from "react";
+import { ChangeEventHandler } from "react";
 
 export default function FilterSection() {
-  const [section, setSection] = useState<SectionENUM>(SectionENUM.ALL);
-
-  const { changeSection } = useNews();
+  const { changeSection, getNewsFromApi } = useNewsContext();
 
   const selectSection: ChangeEventHandler<HTMLSelectElement> = (e) => {
-    setSection(e.target.value as SectionENUM);
+    changeSection(e.target.value as SectionENUM);
   };
 
   const bg = useColorModeValue("white", "gray.800");
@@ -31,13 +29,7 @@ export default function FilterSection() {
           </option>
         ))}
       </Select>
-      <Button
-        onClick={() => {
-          changeSection(section);
-        }}
-      >
-        Filter
-      </Button>
+      <Button onClick={getNewsFromApi}>Filter</Button>
     </Flex>
   );
 }

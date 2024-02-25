@@ -1,9 +1,19 @@
 import { NewsService } from "@/services/api/nyt";
 import { NewsDTO } from "@/services/dto";
 import { SectionENUM } from "@/services/enum";
-import { useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 
-interface IState {
+interface INewsProvider {
+  children: JSX.Element;
+}
+
+interface INewsContext {
+  newsState: INewsState;
+  changeSection: (section: SectionENUM) => void;
+  getNewsFromApi: () => void;
+}
+
+interface INewsState {
   news: NewsDTO[] | null;
   section: SectionENUM;
 }
@@ -18,7 +28,7 @@ const Actions = {
   SET_NEWS: "SEARCH_NEWS",
 };
 
-const reducer = (state: IState, action: IAction) => {
+const reducer = (state: INewsState, action: IAction) => {
   switch (action.type) {
     case Actions.SET_SECTION:
       return { ...state, section: action.payload };
@@ -39,18 +49,21 @@ const initialState = {
   section: SectionENUM.ALL,
 };
 
-export const useNews = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+const NewsContext = createContext<INewsContext>({} as INewsContext);
+
+export default function NewsProvider({ children }: INewsProvider) {
+  const [newsState, dispatch] = useReducer(reducer, initialState);
 
   const changeSection = (section: SectionENUM) => {
-    console.log("changing section to", section);
+    // console.log("changing section to", section);
+    dispatch({ type: Actions.SET_SECTION, payload: section });
   };
 
   const getNewsFromApi = () => {
     const service = new NewsService();
 
     service
-      .getNewsBySection(state.section)
+      .getNewsBySection(newsState.section)
       .then(({ data }) => {
         console.log(data);
         dispatch({ type: Actions.SET_NEWS, payload: data.results });
@@ -60,9 +73,20 @@ export const useNews = () => {
       })
       .finally(() => {
         console.log("encerrou");
+        console.log("estado", newsState);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   };
 
-  return { state, changeSection, getNewsFromApi };
-};
+  useEffect(() => {
+    if (!newsState.news) getNewsFromApi();
+  }),
+    [];
+
+  return (
+    <NewsContext.Provider value={{ newsState, changeSection, getNewsFromApi }}>
+      {children}
+    </NewsContext.Provider>
+  );
+}
+
+export const useNewsContext = () => useContext(NewsContext);
