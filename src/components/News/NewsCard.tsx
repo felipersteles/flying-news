@@ -83,14 +83,14 @@ export default function NewsCard(props: INewsCard) {
               />
             )}
             <Flex direction="column" flex="1" padding="20px 150px">
-              <Text ml={["5px"]} fontWeight={800} color="red">
+              <Text fontWeight={800} color="red">
                 Trending
               </Text>
-              <Heading as="h2" ml={["5px"]} size="lg" letterSpacing={"tighter"}>
+              <Heading as="h2" size="lg" letterSpacing={"tighter"}>
                 {news.title}
               </Heading>
 
-              <Flex direction="column" flex="1" padding={["10px"]}>
+              <Flex direction="column" flex="1">
                 <Text
                   mt={["10px", "12px", "15px"]}
                   fontSize={["30px"]}
@@ -98,6 +98,8 @@ export default function NewsCard(props: INewsCard) {
                 >
                   {news.abstract}
                 </Text>
+
+                <Link href={news.url}>Click here to see the article</Link>
                 <Flex
                   justifyContent="space-between"
                   mt={["15px", "20px", "30px"]}
@@ -144,6 +146,7 @@ export default function NewsCard(props: INewsCard) {
         >
           {news.abstract}
         </Text>
+        <Link href={news.url}>Click here to see the article</Link>
         <Flex justifyContent="space-between" mt={["15px", "20px", "30px"]}>
           <Text fontSize={["12px"]} fontWeight={500}>
             {fromDate(news.published_date)}

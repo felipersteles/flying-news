@@ -11,6 +11,8 @@ import {
 import { MenuIcon } from "@/assets/icons";
 import ColorModeSwitch from "./ColorModeSwitch";
 import FilterSection from "./FilterSection";
+import Link from "next/link";
+import { routes } from "@/navigation";
 
 export default function Header() {
   const bg = useColorModeValue("white", "gray.800");
@@ -21,7 +23,7 @@ export default function Header() {
     <header>
       <Flex
         as="nav"
-        align="center"
+        align="flex-end"
         justify="space-between"
         wrap="wrap"
         padding={6}
@@ -47,9 +49,11 @@ export default function Header() {
           flexGrow={1}
           mt={{ base: 4, md: 0 }}
         >
-          <Text>Docs</Text>
-          <Text>Examples</Text>
-          <Text>Blog</Text>
+          {routes.map((route) => (
+            <Link key={route.path} href={route.path}>
+              {route.name}
+            </Link>
+          ))}
         </Stack>
 
         <Box
