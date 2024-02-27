@@ -15,6 +15,7 @@ interface IBooksProvider {
 
 interface IBooksContext {
   booksState: IBooksState;
+  changeList: (list: string) => void;
 }
 
 interface IBooksState {
@@ -86,12 +87,35 @@ export default function BooksProvider({
       });
   }, [booksState]);
 
+  const changeList = (list: string) => {
+    dispatch({ type: Actions.SET_LIST, payload: list });
+  };
+
+  const getBooksFromApi = useCallback(() => {
+    const service = new BooksService();
+
+    service
+      .getBooksByList(booksState.list)
+      .then(({ data }) => {
+        console.log(data);
+        dispatch({ type: Actions.SET_BOOKS, payload: data.results });
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .then(() => {
+        console.log("fim da req");
+        console.log("estado:", booksState);
+      });
+  }, [booksState]);
+
   useEffect(() => {
     if (!booksState.possibleLists && !doNotGetList) getListsFromApi();
-  }, [booksState.possibleLists, doNotGetList, getListsFromApi]);
+    if (!booksState.books && doNotGetList) getBooksFromApi();
+  }, [booksState, doNotGetList, getListsFromApi, getBooksFromApi]);
 
   return (
-    <BooksContext.Provider value={{ booksState }}>
+    <BooksContext.Provider value={{ booksState, changeList }}>
       {children}
     </BooksContext.Provider>
   );

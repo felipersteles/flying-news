@@ -1,9 +1,9 @@
 "use client";
 
+import { useBooksContext } from "@/contexts/BooksContext";
 import { ListDTO } from "@/services/dto";
 import { Button, Card, Heading } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import React from "react";
 
 interface IListCard {
   list: ListDTO;
@@ -12,9 +12,12 @@ interface IListCard {
 export default function ListCard(props: IListCard) {
   const { list } = props;
 
+  const { changeList } = useBooksContext();
+
   const router = useRouter();
 
   const goToBooks = () => {
+    changeList(list.list_name_encoded);
     router.push(`/books/${list.list_name_encoded}`);
   };
 
