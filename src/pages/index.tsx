@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <NewsProvider>
       <>
-        <Header />
+        <Header showFilter />
         <NewsList />
       </>
     </NewsProvider>

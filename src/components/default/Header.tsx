@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   Box,
@@ -13,10 +15,18 @@ import ColorModeSwitch from "./ColorModeSwitch";
 import FilterSection from "./FilterSection";
 import Link from "next/link";
 import { routes } from "@/navigation";
+import { useRouter } from "next/router";
 
-export default function Header() {
+interface IHeader {
+  showFilter?: boolean;
+}
+
+export default function Header({ showFilter = false }: IHeader) {
+  const router = useRouter();
+
   const bg = useColorModeValue("white", "gray.800");
   const textColor = useColorModeValue("gray.800", "white");
+  const toggleColor = useColorModeValue("#000", "white");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleToggle = () => (isOpen ? onClose() : onOpen());
   return (
@@ -38,11 +48,11 @@ export default function Header() {
         </Flex>
 
         <Box display={{ base: "block", md: "none" }} onClick={handleToggle}>
-          <MenuIcon color="#000" size={32} />
+          <MenuIcon color={toggleColor} size={32} />
         </Box>
 
         <Stack
-          direction={{ base: "column", md: "row" }}
+          direction={["column", "row"]}
           display={{ base: isOpen ? "block" : "none", md: "flex" }}
           width={{ base: "full", md: "auto" }}
           alignItems="center"
@@ -50,9 +60,19 @@ export default function Header() {
           mt={{ base: 4, md: 0 }}
         >
           {routes.map((route) => (
-            <Link key={route.path} href={route.path}>
-              {route.name}
-            </Link>
+            <Flex key={route.path} alignItems="center" gap="5px">
+              <Box
+                borderRadius="50%"
+                width={"5px"}
+                height={"5px"}
+                border={
+                  route.path === router.pathname
+                    ? `1px solid ${toggleColor}`
+                    : ""
+                }
+              />
+              <Link href={route.path}>{route.name}</Link>
+            </Flex>
           ))}
         </Stack>
 
@@ -61,7 +81,7 @@ export default function Header() {
           mt={{ base: 4, md: 0 }}
         >
           <ColorModeSwitch />
-          <FilterSection />
+          {showFilter && <FilterSection />}
         </Box>
       </Flex>
     </header>

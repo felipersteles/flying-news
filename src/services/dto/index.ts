@@ -1,17 +1,36 @@
-export type BookListDTO = {
-  books: BookDTO[];
+export interface ListDTO {
   list_name: string;
-  published_date: string;
-};
+  list_name_encoded: string;
+  newest_published_date: string;
+  updated: string;
+}
 
-export type BookDTO = {
+export interface BooksApiResponse {
+  copyright: string;
+  results: BookDTO[];
+}
+
+export interface BookDTO {
   rank: number;
+  book_details: InfoBook;
+  reviews: Reviews;
+}
+
+interface InfoBook {
   title: string;
   author: string;
-  book_uri: string;
   description: string;
   book_image?: string;
-};
+  publisher: string;
+  primary_isbn13: string;
+}
+
+interface Reviews {
+  book_review_link: string;
+  first_chapter_link: string;
+  sunday_review_link: string;
+  article_chapter_link: string;
+}
 
 export interface NewsApiResponse {
   copyright: string;
