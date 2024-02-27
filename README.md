@@ -1,5 +1,5 @@
 
-<div align="center"><img src="https://www.infoescola.com/wp-content/uploads/2022/08/anunciacao-da-vinci-scaled.jpg" width=650 height=350/></div>
+<div align="center"><img src="https://www.infoescola.com/wp-content/uploads/2022/08/anunciacao-da-vinci-scaled.jpg" width=100% /></div>
 
 # Flying news
 This repository presents a web application built with Next.js and React, enabling users to explore both news articles and best-selling books from the New York Times.
