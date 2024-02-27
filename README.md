@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Flying news
+This repository presents a web application built with Next.js and React, enabling users to explore both news articles and best-selling books from the New York Times.
 
-## Getting Started
+## Features:
 
-First, run the development server:
+- News Articles:
+> * Fetch and display articles from various sections of the New York Times.
+> * Filter articles by specific sections or keywords (optional, depending on implementation).
+- Best-selling Books:
+> *Retrieve and showcase the latest bestsellers from diverse categories (e.g., fiction, non-fiction).
+> *Display book details with title, author, and summary information.
+## Technology Stack:
+- Next.js: Provides server-side rendering (SSR) and static site generation (SSG) for optimized performance and SEO.
+- React: Enables the creation of dynamic and interactive user interfaces.
+- New York Times API: Facilitates retrieving both news and book data efficiently.
 
+##Getting Started:
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+$ git clone https://github.com/your-username/new-york-times-explorer.git
+
 ```
+2. Install dependencies:
+```bash
+$ yarn
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```
+3. Obtain API keys:
+> Visit the New York Times Developer https://developer.nytimes.com/.
+> Create an account and register your application for both the News and Books API sections.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+4. Configure API keys:
+Create a .env.local file at the project root.
+Add the following lines to the file, replacing YOUR_API_KEY with your respective keys:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+`REACT_APP_NYT_NEWS_API_KEY=YOUR_API_KEY`
+`REACT_APP_NYT_BOOKS_API_KEY=YOUR_API_KEY`
 
-## Learn More
+6. Start the development server:
+```bash
+yarn dev
 
-To learn more about Next.js, take a look at the following resources:
+```
+# Contributing:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+We welcome contributions to this project! Please refer to the CONTRIBUTING.md file for guidelines.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+# License:
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Additional Notes:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The .env.local file might require adjustments for different environments (e.g., development or production).
+This is a starting point and can be further enhanced with functionalities like article search, detailed book pages, and user interaction features.
+We encourage you to explore the world of news and bestsellers with this application!
