@@ -7,14 +7,14 @@ This repository presents a web application built with Next.js and React, enablin
 > * Fetch and display articles from various sections of the New York Times.
 > * Filter articles by specific sections or keywords (optional, depending on implementation).
 - Best-selling Books:
-> *Retrieve and showcase the latest bestsellers from diverse categories (e.g., fiction, non-fiction).
-> *Display book details with title, author, and summary information.
+> * Retrieve and showcase the latest bestsellers from diverse categories (e.g., fiction, non-fiction).
+> * Display book details with title, author, and summary information.
 ## Technology Stack:
 - Next.js: Provides server-side rendering (SSR) and static site generation (SSG) for optimized performance and SEO.
 - React: Enables the creation of dynamic and interactive user interfaces.
 - New York Times API: Facilitates retrieving both news and book data efficiently.
 
-##Getting Started:
+## Getting Started:
 
 1. Clone the repository:
 ```bash
@@ -42,11 +42,11 @@ Add the following lines to the file, replacing YOUR_API_KEY with your respective
 yarn dev
 
 ```
-# Contributing:
+## Contributing:
 
 We welcome contributions to this project! Please refer to the CONTRIBUTING.md file for guidelines.
 
-# License:
+## License:
 
 
 # Additional Notes:
