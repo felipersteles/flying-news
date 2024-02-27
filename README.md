@@ -1,3 +1,6 @@
+
+<div><img src="https://www.infoescola.com/wp-content/uploads/2022/08/anunciacao-da-vinci-scaled.jpg" width=500 height=500/></div>
+
 # Flying news
 This repository presents a web application built with Next.js and React, enabling users to explore both news articles and best-selling books from the New York Times.
 
@@ -34,12 +37,12 @@ $ yarn
 Create a .env.local file at the project root.
 Add the following lines to the file, replacing YOUR_API_KEY with your respective keys:
 
-`REACT_APP_NYT_NEWS_API_KEY=YOUR_API_KEY`
+`REACT_APP_NYT_NEWS_API_KEY=YOUR_API_KEY`<br/>
 `REACT_APP_NYT_BOOKS_API_KEY=YOUR_API_KEY`
 
 6. Start the development server:
 ```bash
-yarn dev
+$ yarn dev
 
 ```
 ## Contributing:
