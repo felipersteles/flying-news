@@ -9,6 +9,7 @@ import {
   Stack,
   Text,
   useDisclosure,
+  Image,
 } from "@chakra-ui/react";
 import { MenuIcon } from "@/assets/icons";
 import ColorModeSwitch from "./ColorModeSwitch";
@@ -33,7 +34,7 @@ export default function Header({ showFilter = false }: IHeader) {
     <header>
       <Flex
         as="nav"
-        align="flex-end"
+        align="center"
         justify="space-between"
         wrap="wrap"
         padding={6}
@@ -42,8 +43,9 @@ export default function Header({ showFilter = false }: IHeader) {
         borderBottom={`1px solid black`}
       >
         <Flex align="center" mr={5}>
+          <Image src="imgs/davintepc.png" width={[30, 50]} alt="logo" />
           <Heading as="h1" size="lg" letterSpacing={"tighter"}>
-            Flying News 📰
+            Flying News
           </Heading>
         </Flex>
 

@@ -12,8 +12,9 @@ export interface BooksApiResponse {
 
 export interface BookDTO {
   rank: number;
-  book_details: InfoBook;
+  book_details: InfoBook[];
   reviews: Reviews;
+  amazon_product_url: string;
 }
 
 interface InfoBook {

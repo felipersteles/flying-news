@@ -10,12 +10,13 @@ interface INewsProvider {
 interface INewsContext {
   newsState: INewsState;
   changeSection: (section: SectionENUM) => void;
-  getNewsFromApi: () => void;
+  getNews: () => void;
 }
 
 interface INewsState {
   news: NewsDTO[] | null;
   section: SectionENUM;
+  fetching: boolean;
 }
 
 interface IAction {
@@ -25,7 +26,8 @@ interface IAction {
 
 const Actions = {
   SET_SECTION: "SET_SECTION",
-  SET_NEWS: "SEARCH_NEWS",
+  SET_NEWS: "SET_NEWS",
+  SET_FETCHING: "SET_FETCHING",
 };
 
 const reducer = (state: INewsState, action: IAction) => {
@@ -38,6 +40,10 @@ const reducer = (state: INewsState, action: IAction) => {
       return { ...state, news: action.payload };
       break;
 
+    case Actions.SET_FETCHING:
+      return { ...state, fetching: action.payload };
+      break;
+
     default:
       return state;
       break;
@@ -47,6 +53,7 @@ const reducer = (state: INewsState, action: IAction) => {
 const initialState = {
   news: null,
   section: SectionENUM.ALL,
+  fetching: true,
 };
 
 const NewsContext = createContext<INewsContext>({} as INewsContext);
@@ -59,21 +66,24 @@ export default function NewsProvider({ children }: INewsProvider) {
     dispatch({ type: Actions.SET_SECTION, payload: section });
   };
 
+  const getNews = () => {
+    dispatch({ type: Actions.SET_FETCHING, payload: true });
+    getNewsFromApi();
+  };
+
   const getNewsFromApi = () => {
     const service = new NewsService();
 
     service
       .getNewsBySection(newsState.section)
       .then(({ data }) => {
-        console.log(data);
         dispatch({ type: Actions.SET_NEWS, payload: data.results });
       })
       .catch((err) => {
         console.log(err);
       })
       .finally(() => {
-        console.log("encerrou");
-        console.log("estado", newsState);
+        dispatch({ type: Actions.SET_FETCHING, payload: false });
       });
   };
 
@@ -83,7 +93,7 @@ export default function NewsProvider({ children }: INewsProvider) {
     [];
 
   return (
-    <NewsContext.Provider value={{ newsState, changeSection, getNewsFromApi }}>
+    <NewsContext.Provider value={{ newsState, changeSection, getNews }}>
       {children}
     </NewsContext.Provider>
   );

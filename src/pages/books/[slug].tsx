@@ -1,17 +1,19 @@
-"use client";
-
+import BooksList from "@/components/Books/BooksList";
 import Header from "@/components/default/Header";
 import BooksProvider from "@/contexts/BooksContext";
-import { useRouter } from "next/router";
+import { Heading, Box, Text } from "@chakra-ui/react";
 import React from "react";
 
-export default function BooksList() {
-  const router = useRouter();
+export default function BooksListPage() {
   return (
     <BooksProvider doNotGetList>
       <>
         <Header />
-        <div>{router.query.slug}</div>
+        <Box margin={["5px 10px"]}>
+          <Heading>The New York Times Best Sellers lists</Heading>
+          <Text>Click on the card to go amazon page of it</Text>
+        </Box>
+        <BooksList />
       </>
     </BooksProvider>
   );

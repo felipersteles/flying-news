@@ -53,7 +53,7 @@ const AnimatedTextCharacter = ({ text }: IAnimatedTextCharacter) => {
       {letters.map((letter, index) => (
         <Text
           as={motion.span}
-          fontSize="23px"
+          fontSize={["18px", "20px", "23px"]}
           fontWeight={700}
           color="black"
           variants={child}

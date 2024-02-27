@@ -4,7 +4,7 @@ import { Button, Flex, Select, useColorModeValue } from "@chakra-ui/react";
 import { ChangeEventHandler } from "react";
 
 export default function FilterSection() {
-  const { changeSection, getNewsFromApi } = useNewsContext();
+  const { changeSection, getNews } = useNewsContext();
 
   const selectSection: ChangeEventHandler<HTMLSelectElement> = (e) => {
     changeSection(e.target.value as SectionENUM);
@@ -29,7 +29,7 @@ export default function FilterSection() {
           </option>
         ))}
       </Select>
-      <Button onClick={getNewsFromApi}>Filter</Button>
+      <Button onClick={getNews}>Filter</Button>
     </Flex>
   );
 }

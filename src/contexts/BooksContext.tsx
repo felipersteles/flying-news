@@ -15,24 +15,27 @@ interface IBooksProvider {
 
 interface IBooksContext {
   booksState: IBooksState;
-  changeList: (list: string) => void;
+  getBooksFromApi: (list: string) => void;
+  setFetching: (value: boolean) => void;
 }
 
 interface IBooksState {
   books: BookDTO[] | null;
   list: string | null;
   possibleLists: ListDTO[] | null;
+  fetching: boolean;
 }
 
 interface IAction {
   type: string;
-  payload: any;
+  payload?: any;
 }
 
 const Actions = {
   SET_LIST: "SET_LIST",
   SET_POSSIBLE_LISTS: "SET_LISTS",
   SET_BOOKS: "SET_BOOKS",
+  SET_FETCHING: "SET_FETCHING",
 };
 
 const reducer = (state: IBooksState, action: IAction) => {
@@ -49,6 +52,10 @@ const reducer = (state: IBooksState, action: IAction) => {
       return { ...state, possibleLists: action.payload };
       break;
 
+    case Actions.SET_FETCHING:
+      return { ...state, fetching: action.payload };
+      break;
+
     default:
       return state;
       break;
@@ -59,6 +66,7 @@ const initialState: IBooksState = {
   books: null,
   list: null,
   possibleLists: null,
+  fetching: true,
 };
 
 const BooksContext = createContext<IBooksContext>({} as IBooksContext);
@@ -69,53 +77,47 @@ export default function BooksProvider({
 }: IBooksProvider) {
   const [booksState, dispatch] = useReducer(reducer, initialState);
 
+  const setFetching = (value: boolean) =>
+    dispatch({ type: Actions.SET_POSSIBLE_LISTS, payload: value });
+
   const getListsFromApi = useCallback(() => {
     const service = new BooksService();
 
     service
       .getLists()
       .then(({ data }) => {
-        console.log(data);
         dispatch({ type: Actions.SET_POSSIBLE_LISTS, payload: data.results });
       })
       .catch((err) => {
         console.error(err);
       })
       .then(() => {
-        console.log("fim da req");
-        console.log("estado:", booksState);
+        dispatch({ type: Actions.SET_FETCHING, payload: false });
       });
-  }, [booksState]);
+  }, []);
 
-  const changeList = (list: string) => {
-    dispatch({ type: Actions.SET_LIST, payload: list });
-  };
-
-  const getBooksFromApi = useCallback(() => {
+  const getBooksFromApi = useCallback((list: string) => {
     const service = new BooksService();
 
     service
-      .getBooksByList(booksState.list)
+      .getBooksByList(list)
       .then(({ data }) => {
-        console.log(data);
         dispatch({ type: Actions.SET_BOOKS, payload: data.results });
       })
       .catch((err) => {
         console.error(err);
       })
       .then(() => {
-        console.log("fim da req");
-        console.log("estado:", booksState);
+        dispatch({ type: Actions.SET_FETCHING, payload: false });
       });
-  }, [booksState]);
+  }, []);
 
   useEffect(() => {
     if (!booksState.possibleLists && !doNotGetList) getListsFromApi();
-    if (!booksState.books && doNotGetList) getBooksFromApi();
-  }, [booksState, doNotGetList, getListsFromApi, getBooksFromApi]);
+  }, [booksState, doNotGetList, getListsFromApi]);
 
   return (
-    <BooksContext.Provider value={{ booksState, changeList }}>
+    <BooksContext.Provider value={{ booksState, getBooksFromApi, setFetching }}>
       {children}
     </BooksContext.Provider>
   );

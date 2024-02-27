@@ -7,8 +7,17 @@ import AnimatedTextCharacter from "./AnimatedTextCharacter";
 
 export default function FollowMe() {
   return (
-    <Box bg="red" padding="5px 10px" width={"100vw"} m={["0", "15px 0"]}>
-      <Flex gap="15px" justifyContent="center" alignItems="center">
+    <Box
+      bg="red"
+      padding={["1px 5px", "5px 10px"]}
+      width={"100vw"}
+      m={["10px 0", "15px 0"]}
+    >
+      <Flex
+        gap={["0", "13px", "15px"]}
+        justifyContent="center"
+        alignItems="center"
+      >
         <Link href="https://www.linkedin.com/in/felipsteles/">
           <Button bg="transparent">
             <LinkedinIcon size="30" color="black" />

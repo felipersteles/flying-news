@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import NewsCard from "./NewsCard";
 import { NewsDTO } from "@/services/dto";
-import { Flex } from "@chakra-ui/react";
+import { Box, Flex, Spinner } from "@chakra-ui/react";
 import { useNewsContext } from "@/contexts/NewsContext";
+import Loading from "../default/Loading";
 
 // const mockedData = [
 //   {
@@ -137,6 +138,8 @@ import { useNewsContext } from "@/contexts/NewsContext";
 
 export default function NewsList() {
   const { newsState } = useNewsContext();
+
+  if (newsState.fetching) return <Loading />;
 
   return (
     <Flex padding={["0", "20px 100px"]} direction="column" alignItems="center">
